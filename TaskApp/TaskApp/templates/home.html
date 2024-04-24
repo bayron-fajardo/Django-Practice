@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Tareas y Personas</title>
+</head>
+<body>
+    <h1>Lista de Tareas y Personas</h1>
+    <h2>Tareas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre de Tarea</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Fecha Inicial</th>
+                <th>Fecha Estimada</th>
+                <th>Personas asignadas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.name }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.state }}</td>
+                <td>{{ task.fechaInicial }}</td>
+                <td>{{ task.fechaEstimada }}</td>
+                <td>
+                    <ul>
+                        {% for person in task.personas.all %}
+                        <li>{{ person.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <h2>Personas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre de Persona</th>
+                <th>Rol</th>
+                <th>Años de Experiencia</th>
+                <th>Fecha de Ingreso</th>
+                <th>Tareas asignadas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for person in persons %}
+            <tr>
+                <td>{{ person.name }}</td>
+                <td>{{ person.rol }}</td>
+                <td>{{ person.yearsExperience }}</td>
+                <td>{{ person.fechaIngreso }}</td>
+                <td>
+                    <ul>
+                        {% for task in person.tasks.all %}
+                        <li>{{ task.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href="{% url 'add_task' %}">Agregar Tarea</a>
+    <a href="{% url 'add_person' %}">Agregar Persona</a>
+</body>
+</html>
