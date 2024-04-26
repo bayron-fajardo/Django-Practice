@@ -1,0 +1,41 @@
+{% extends 'layout.html'%}
+{% block title%} Registro Usuarios{% endblock %}
+
+{% block body%}
+
+<div class="row justify-content-center">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 py-5">
+        <h2 class="text-center">Registro</h2>
+        <div class="card">
+            <div class="card-body py-5 rounded">
+                <form action="/registrarUsuario/" method="POST">{% csrf_token %}
+                    
+                    <div class="form-group py-3 ">
+                        <input type="text" id="txtId" name="txtId" class="form-control" placeholder="Ingrese un id" minlength="6" maxlength ="6" required>   
+                    </div>
+                    <div class="form-group py-3 ">
+                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Ingrese su Nombre" minlength="6" maxlength ="15" required>   
+                    </div>
+                    <div class="form-group py-3 ">
+                        <input type="email" id="txtCorreo" name="txtCorreo" class="form-control" placeholder="Ingrese su Correo"  maxlength ="30" required>   
+                    </div>
+                    <div class="form-group py-3 ">
+                        <input type="text" id="txtUsuario" name="txtUsuario" class="form-control" placeholder="Ingrese su usuario" minlength="6" maxlength ="15" required>   
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="password" id="txtContrasena" name="txtContrasena" class="form-control" placeholder="Contraseña"  maxlength ="15" required>   
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="password" id="txtContrasenaConfirmacion" name="txtContrasenaConfirmacion" class="form-control" placeholder="Confirmar contraseña"  maxlength ="15" required>   
+                    </div>
+                    <div class="form-group py-4 ">
+                        <button type="submit" class="btn btn-success btn-block text-white">Registrarse</button>
+                        <a href="">Iniciar Sesion</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

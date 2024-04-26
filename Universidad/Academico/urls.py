@@ -5,5 +5,6 @@ urlpatterns = [
         path('registrarCurso/', views.registrarCurso),
         path('edicionCurso/<codigo>', views.edicionCurso),
         path('editarCurso/', views.editarCurso),
+        path('contacto/', views.contacto),
         path('eliminacionCurso/<codigo>', views.eliminarCurso)
 ]

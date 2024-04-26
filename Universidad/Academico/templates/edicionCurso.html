@@ -11,16 +11,16 @@
             <div class="card-body">
                 <form action="/editarCurso/" method="POST">{% csrf_token %}
                     
-                    <div class="form-group">
+                    <div class="form-group py-2">
                         <input type="text" id="txtCodigo" name="txtCodigo" value="{{curso.codigo}}" class="form-control" placeholder="Código" minlength="6" maxlength ="6" readonly>   
                     </div>
-                    <div class="form-group">
+                    <div class="form-group py-2">
                         <input type="text" id="txtNombre" name="txtNombre" value="{{curso.nombre}}"class="form-control" placeholder="Nombre"  maxlength ="50" required>   
                     </div>
-                    <div class="form-group">
+                    <div class="form-group py-2">
                         <input type="number" value="1" id="numCreditos" name="numCreditos" value="{{curso.creditos}}" class="form-control" minlength="1"  maxlength ="5" required>   
                     </div>
-                    <div class="form-group">
+                    <div class="form-group py-4">
                         <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
                     </div>
                 </form>
