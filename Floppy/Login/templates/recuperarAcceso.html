@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block title%}Recuperar Contraseña {% endblock%}
+{% block body%}
+
+<div class="row justify-content-center">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 py-5">
+        <h2 class="text-center">Recuperar Acceso</h2>
+        <div class="card">
+            <div class="card-body py-5 rounded">
+                <form action="/recuperarContrasena/" method="POST">{% csrf_token %}
+                    
+                    <div class="form-group py-3 ">
+                        <input type="email" id="txtCorreo" name="txtCorreo" class="form-control" placeholder="Ingrese su Correo"  maxlength ="30" required>   
+                    </div>
+                    <div class="form-group py-3 ">
+                        <input type="text" id="txtConfirmarCorreo" name="txtConfirmarCorreo" class="form-control" placeholder="Confirmar Correo"  maxlength ="30" required>   
+                    </div>
+                    <div class="form-group py-4 ">
+                        <button type="submit" class="btn btn-success btn-block text-white">Recuperar Contraseña</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

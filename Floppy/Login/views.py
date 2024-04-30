@@ -1,6 +1,13 @@
+from django.conf import settings
 from django.shortcuts import render, HttpResponse, redirect
 from .models import Usuario
 from django.contrib.auth import authenticate, login
+
+import os
+import smtplib
+from dotenv import load_dotenv
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 
 def home(request):
@@ -10,6 +17,10 @@ def home(request):
 def viewRegistrarUsuarios(request):
 
     return render(request,"registrarUsuario.html")
+
+def viewRecuperarAcceso(request):
+
+    return render(request,"recuperarAcceso.html")
 
 def registrarUsuario(request):
 
@@ -44,3 +55,53 @@ def verificarInicioSesion(request):
 
     else:
         return HttpResponse(['Solo Metodo POST'])
+    
+
+def recuperarContrasena(request):
+
+    correo = request.POST['txtCorreo']
+    confirmarCorreo = request.POST['txtConfirmarCorreo']
+
+    if correo == confirmarCorreo:
+
+        try:
+            
+
+            load_dotenv()
+
+            remitente = os.getenv('USER')
+            asunto = 'Recuperar Acceso a tu cuenta de Flopyy'
+
+            msg = MIMEMultipart()
+
+            msg['Subject'] = asunto
+            msg['From'] = remitente
+            msg['To'] = correo
+            
+            ruta_archivo = os.path.join(settings.BASE_DIR, 'Login', 'templates', 'correoAcceso.html')
+            
+            with open (ruta_archivo,'r') as archivo:
+                html = archivo.read()
+
+            msg.attach(MIMEText(html,'html'))
+
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+
+            server.starttls()
+            server.login(remitente, os.getenv('PASS'))
+
+            server.sendmail(remitente, correo, msg.as_string())
+
+            server.quit()
+
+            
+            return HttpResponse("Correo de recuperación enviado correctamente")
+
+        except Exception as e:
+            
+            print("Error durante el envío del correo electrónico:", e)
+            
+            return HttpResponse("Ocurrió un error durante el proceso de recuperación de contraseña")
+    else:
+
+        return HttpResponse("Error al ingresar el correo")
